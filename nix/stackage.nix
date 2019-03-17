@@ -918,8 +918,8 @@ inherit (pkgs) zlib;};
            pname = "MonadRandom";
            version = "0.5.1.1";
            sha256 = "abda4a297acf197e664695b839b4fb70f53e240f5420489dc21bcf6103958470";
-           revision = "1";
-           editedCabalFile = "14izcj2myfsvfwiy1w78q5zddxd6za77yy6b8zwb1x49lnw7jpck";
+           revision = "2";
+           editedCabalFile = "0l6a39vmqxig7jpr6snync4sli77wm6lwzypmmvx103d65p17k8k";
            libraryHaskellDepends = [
              base mtl primitive random transformers transformers-compat
            ];
@@ -24098,18 +24098,20 @@ inherit (pkgs) libjpeg; inherit (pkgs) libpng; inherit (pkgs) zlib;};
            license = stdenv.lib.licenses.mit;
          }) {};
       "obiwan" = callPackage
-        ({ mkDerivation, base, binary, bytestring, filepattern, hslua
-         , network, optparse-applicative, stdenv, text
+        ({ mkDerivation, base, binary, bytestring, case-insensitive
+         , filepattern, hslua, network, optparse-applicative, stdenv
          }:
          mkDerivation {
            pname = "obiwan";
            version = "0.1.0.0";
            src = ../.;
-           isLibrary = false;
+           isLibrary = true;
            isExecutable = true;
+           libraryHaskellDepends = [
+             base binary bytestring case-insensitive filepattern network
+           ];
            executableHaskellDepends = [
-             base binary bytestring filepattern hslua network
-             optparse-applicative text
+             base bytestring hslua optparse-applicative
            ];
            doHaddock = false;
            doCheck = false;
